@@ -166,7 +166,7 @@ const page = () => {
             ))}
           </div>
         </div>
-        <div className="flex flex-col lg:flex-row items-start justify-center w-full p-12">
+        <div className="flex flex-col lg:flex-row items-start justify-center w-full p-8 lg:p-12">
           <div className="flex flex-col items-center justify-center w-full lg:w-5/12">
             <Image src={People} alt="People" className="w-full" />
           </div>
@@ -209,6 +209,25 @@ const page = () => {
               you financially on your journey.
             </span>
           </div>
+        </div>
+        <div className="flex flex-col items-start justify-center self-start w-full lg:w-7/12 p-8 lg:pl-20 py-18">
+          <span className="text-2xl lg:text-2xl flex flex-row items-center justify-start gap-2 font-semibold py-9 lg:py-1">
+            <FcBrokenLink size={32} />
+            What we offer
+          </span>
+          <span className="font-light text-5xl mb-6">
+            Be Part Of Something Bigger
+          </span>
+          <span className="text-lg font-semibold text-gray-400 w-full text-justify">
+            The Cloud Global Revelout visionary team is committed to delivering
+            exceptional results, focused being one step ahead. We are building
+            an FX trading platform for the long-term, setting up the standard to
+            change the fortune of future generations to come! A completely
+            unique approach to EA (Cryptocurrency software) and AI development.
+            Outstanding results, closely monitored and measured by the Milestone
+            trading team of dedicated professionals. No Whitelabel or 3rd party
+            technology employed.
+          </span>
         </div>
         <div className="flex flex-col items-center justify-center w-full p-8 py-20">
           <span className="font-bold text-4xl py-3"> How it works </span>
