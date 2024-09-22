@@ -8,7 +8,7 @@ const page = () => {
       <span className="text-3xl font-semibold my-8"> Create Account </span>
       <form
         role="form"
-        className="flex flex-col gap-8 w-5/12 items-center justify-center"
+        className="flex flex-col gap-8 w-10/12 lg:w-5/12 items-center justify-center"
       >
         <input
           type="text"
@@ -52,7 +52,7 @@ const page = () => {
         </button>
         <span className="font-light text-sm">
           Already Have An Account ?{" "}
-          <Link href={"/auth/signup"} className="border-b border-solid pb-1">
+          <Link href={"/auth/signin"} className="border-b border-solid pb-1">
             Sign In
           </Link>
         </span>
