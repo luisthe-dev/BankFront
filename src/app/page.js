@@ -1,6 +1,3 @@
-"use client";
-
-import Link from "next/link";
 import React from "react";
 import Logo from "@/assets/images/logo.png";
 import Campaign from "@/assets/images/campaign.jpg";
