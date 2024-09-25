@@ -7,6 +7,7 @@ import * as axiosHandler from "@/handlers/axiosHandler";
 import { createSessionItem, getSessionItem } from "@/handlers/sessionHandler";
 import { IoIosWallet } from "react-icons/io";
 import { makeMonetaryNumber } from "@/handlers/helperHandler";
+import MyTable from "@/components/MyTable";
 
 const page = () => {
   const [referralData, setReferralData] = useState([
@@ -92,33 +93,19 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-start justify-start p-1 lg:p-5 w-full">
-        <span className="px-1 text-2xl font-semibold"> My Referrals </span>
-        <div className="w-full">
-          <div className="flex flex-row items-start justify-start w-full p-8 border-b pb-2 pr-2">
-            <span className="w-1/6 text-md font-bold"> S/N </span>
-            <span className="w-3/6 text-md font-bold"> Account Name </span>
-            <span className="w-2/6 text-md font-bold"> Account Status </span>
-          </div>
-          {referralData?.referred &&
-            referralData?.referred?.map((referral, referralKey) => (
-              <div
-                className="flex flex-row items-start justify-start w-full border-b p-3 px-8 pr-2"
-                key={referralKey}
-              >
-                <span className="w-1/6 text-md font-medium">
-                  {referralKey + 1}
-                </span>
-                <span className="w-3/6 text-md font-medium">
-                  {`${referral.first_name} ${referral.last_name}`}
-                </span>
-                <span className="w-2/6 text-md font-medium">
-                  {referral.status}
-                </span>
-              </div>
-            ))}
-        </div>
-      </div>
+      <MyTable
+        title={"My Referrals"}
+        data={
+          referralData?.map((referral) => {
+            return [
+              `${referral.first_name} ${referral.last_name}`,
+              referral.status,
+            ];
+          }) ?? []
+        }
+        keys={["Account Name", "Account Status"]}
+        spacing={"w-1/3"}
+      />
     </div>
   );
 };

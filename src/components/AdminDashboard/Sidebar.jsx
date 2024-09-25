@@ -1,36 +1,29 @@
 import Link from "next/link";
 import React from "react";
-import { LuLayoutDashboard, LuHistory } from "react-icons/lu";
+import { LuLayoutDashboard, LuHistory, LuUser } from "react-icons/lu";
 import { RiSettings3Fill } from "react-icons/ri";
-import { IoIosWallet } from "react-icons/io";
-import { PiUsersFour } from "react-icons/pi";
 
 const Sidebar = ({ menuState }) => {
   const menuItems = [
     {
       icon: <LuLayoutDashboard />,
       title: "Home",
-      link: "/user",
+      link: "/admin",
+    },
+    {
+      icon: <LuUser />,
+      title: "Users",
+      link: "/admin/users",
     },
     {
       icon: <LuHistory />,
-      title: "Transaction History",
-      link: "/user/history",
-    },
-    {
-      icon: <IoIosWallet />,
-      title: "My Wallets & Plan",
-      link: "/user/wallets",
-    },
-    {
-      icon: <PiUsersFour />,
-      title: "My Referrals",
-      link: "/user/referrals",
+      title: "User Transaction",
+      link: "/admin/transactions",
     },
     {
       icon: <RiSettings3Fill />,
       title: "Settings",
-      link: "/user/settings",
+      link: "/admin/settings",
     },
   ];
 

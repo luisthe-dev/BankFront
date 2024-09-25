@@ -129,7 +129,7 @@ const page = () => {
         <SiteHeader />
         <div className="flex flex-col lg:flex-row w-full items-center py-12 px-5 lg:px-14 gap-5">
           <div className="flex items-start flex-col justify-center py-12 gap-4">
-            <span className="text-6xl lg:text-9xl font-semibold">
+            <span className="text-6xl lg:text-7xl font-semibold">
               A New Era Of Investing: Make Your Money Grow
             </span>
             <span className="text-2xl font-light w-full lg:w-10/12 py-3 lg:py-12">
@@ -277,7 +277,7 @@ const page = () => {
             the position, hopefully once the value of the asset has moved
             higher.
           </span>
-          <div className="w-full flex flex-col items-center lg:items-start justify-center w-10/12 py-10">
+          <div className="w-full flex flex-col items-center lg:items-start justify-center lg:w-10/12 py-10">
             <button className="p-4 flex flex-row items-center justify-center gap-2 font-semibold text-md px-10 bg-green-700">
               Become a copy trader
               <RxArrowTopRight size={20} />

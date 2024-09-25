@@ -104,17 +104,17 @@ const page = () => {
       <div className="w-full flex flex-col lg:flex-row items-center justify-center">
         <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-green-800">
           <span className="text-2xl font-extrabold"> Total Balance </span>
-          <span className="text-7xl font-extralight">
+          <span className="text-5xl font-extralight">
             {makeMonetaryNumber(900000000)}
           </span>
         </div>
         <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-green-800">
           <span className="text-2xl font-extrabold"> Active Plan </span>
-          <span className="text-7xl font-extralight">Basic</span>
+          <span className="text-5xl font-extralight">Basic</span>
         </div>
         <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-green-800">
           <span className="text-2xl font-extrabold"> Invested Balance </span>
-          <span className="text-7xl font-extralight">
+          <span className="text-5xl font-extralight">
             {makeMonetaryNumber(1800000)}
           </span>
         </div>
@@ -140,8 +140,8 @@ const page = () => {
                       : "bg-black text-white"
                   }`}
                 >
-                  <span className="text-3xl font-semibold"> {coin.name} </span>
-                  <span className="text-xl font-extralight">
+                  <span className="text-xl font-semibold"> {coin.name} </span>
+                  <span className="text-md font-extralight">
                     {makeMonetaryNumber(coin.current_price)}
                   </span>
                 </div>
