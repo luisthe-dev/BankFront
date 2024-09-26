@@ -21,6 +21,16 @@ const Sidebar = ({ menuState }) => {
       link: "/admin/transactions",
     },
     {
+      icon: <LuHistory />,
+      title: "Pending Transaction",
+      link: "/admin/pending",
+    },
+    {
+      icon: <LuHistory />,
+      title: "Investment Plans",
+      link: "/admin/plans",
+    },
+    {
       icon: <RiSettings3Fill />,
       title: "Settings",
       link: "/admin/settings",

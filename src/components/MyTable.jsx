@@ -1,10 +1,11 @@
 import React from "react";
 
-const MyTable = ({ data, title, keys, spacing }) => {
+const MyTable = ({ data, title, keys, spacing, actionButton }) => {
   return (
     <>
       <div className="flex flex-col items-start justify-start p-1 lg:p-5 w-full">
         <span className="px-1 text-2xl font-semibold"> {title} </span>
+        {actionButton}
         <div className="w-full">
           <div className="flex flex-row flex-wrap items-start justify-start w-full p-8 border-b pb-2 pr-2">
             <span className={`${spacing} text-md font-bold`}>S/N</span>

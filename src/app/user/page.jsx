@@ -4,22 +4,29 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
 import { makeMonetaryNumber, makeReadableDate } from "@/handlers/helperHandler";
+// import ApexCharts from "apexcharts";
+import dynamic from "next/dynamic";
+
+const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const page = () => {
   const [coinsData, setCoinsData] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState(null);
   const [coinData, setCoinData] = useState(null);
-  const checkRef = useRef(false);
+  const [chartOptions, setChartOptions] = useState({
+    chart: {
+      type: "candlestick",
+    },
+    series: [],
+  });
 
   const selectSingleCoin = async (id) => {
-    checkRef.current = true;
     const data = await axios.get(
-      `https://api.coingecko.com/api/v3/coins/${id}/market_chart`,
+      `https://api.coingecko.com/api/v3/coins/${id}/ohlc`,
       {
         params: {
           vs_currency: "USD",
-          days: 10,
-          precision: 5,
+          days: "30",
           x_cg_demo_api_key: "CG-sNijLgUSVuoaXP7BEit3KXTn",
         },
       }
@@ -31,50 +38,51 @@ const page = () => {
       setSelectedCoin(id);
       setCoinData(data.data);
       renderChart(data.data);
-      checkRef.current = false;
     }
   };
 
   const renderChart = async (data) => {
-    if (!checkRef.current) return;
-
-    document.getElementById("charContainer").innerHTML =
-      '<canvas id="coinData" className="w-full"></canvas>';
-
-    new Chart(document.getElementById("coinData"), {
-      type: "line",
-      options: {
-        borderColor: "#acefda",
-        pointStyle: false,
-        scales: {
-          x: {
-            ticks: {
-              display: false,
-            },
-            display: false,
+    const options = {
+      chart: {
+        id: `candlestick`,
+        toolbar: false,
+        zoom: 9,
+      },
+      yaxis: {
+        labels: {
+          formatter: function (value) {
+            return `$${value}`;
           },
-        },
-        plugins: {
-          legend: {
-            display: false,
-          },
-          title: {
-            display: false,
-          },
-          label: {
-            display: false,
-          },
+          color: "red",
         },
       },
-      data: {
-        labels: data.prices?.map((row) => makeReadableDate(row[0])),
-        datasets: [
-          {
-            data: data.prices?.map((row) => Number(row[1])),
-          },
-        ],
+      xaxis: {
+        labels: {
+          show: false,
+        },
+        lines: {
+          show: false,
+        },
       },
-    });
+      tooltip: {
+        theme: "dark",
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      legend: {
+        show: false,
+      },
+      series: [
+        {
+          data: data,
+        },
+      ],
+    };
+
+    console.log("efef", options);
+
+    setChartOptions(options);
   };
 
   const getMarketData = async () => {
@@ -124,7 +132,14 @@ const page = () => {
           className="w-full lg:w-9/12 px-5 my-3 flex flex-col items-center justify-center"
           id="charContainer"
         >
-          <canvas id="coinData" className="relative"></canvas>
+          {chartOptions?.series[0]?.data && (
+            <ApexCharts
+              type="candlestick"
+              options={chartOptions}
+              series={chartOptions?.series}
+              className={"w-full"}
+            />
+          )}
         </div>
         <div className="w-full lg:w-3/12 p-3 flex flex-col items-center justify-center">
           <div className="border border-solid border-gray-400 p-4 py-9 w-full overflow-x-scroll">
