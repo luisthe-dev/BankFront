@@ -1,10 +1,8 @@
 "use client";
 
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import Chart from "chart.js/auto";
-import { makeMonetaryNumber, makeReadableDate } from "@/handlers/helperHandler";
-// import ApexCharts from "apexcharts";
+import React, { useEffect, useState } from "react";
+import { makeMonetaryNumber } from "@/handlers/helperHandler";
 import dynamic from "next/dynamic";
 
 const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });

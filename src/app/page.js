@@ -13,8 +13,27 @@ import { PiLightningLight } from "react-icons/pi";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
+
+import BBC from "@/assets/images/bbc.svg";
+import Binance from "@/assets/images/binance.png";
+import BlockChain from "@/assets/images/blockchain.png";
+import Dragonfly from "@/assets/images/dragonfly.png";
+import Fenbushi from "@/assets/images/fenbushi.png";
+import Rockx from "@/assets/images/rockx.png";
+import Sequoia from "@/assets/images/sequoia.png";
+import Tiger from "@/assets/images/tiger.png";
+
 const page = () => {
-  const logos = [Logo, Logo, Logo, Logo, Logo, Logo, Logo];
+  const logos = [
+    BBC,
+    Binance,
+    BlockChain,
+    Dragonfly,
+    Fenbushi,
+    Rockx,
+    Sequoia,
+    Tiger,
+  ];
 
   const howWorks = [
     {
