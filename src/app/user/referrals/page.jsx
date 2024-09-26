@@ -104,7 +104,7 @@ const page = () => {
           }) ?? []
         }
         keys={["Account Name", "Account Status"]}
-        spacing={"w-1/3"}
+        spacing={"w-1/3 lg:w-1/3"}
       />
     </div>
   );

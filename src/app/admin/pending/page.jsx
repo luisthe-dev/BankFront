@@ -85,7 +85,7 @@ const page = () => {
             }) ?? []
           }
           keys={["Account Name", "Transaction Type", "Amount", "Actions"]}
-          spacing={"w-1/6"}
+          spacing={"w-1/3 lg:w-1/6"}
         />
       </div>
     </>

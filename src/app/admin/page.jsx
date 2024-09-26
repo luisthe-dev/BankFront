@@ -57,7 +57,7 @@ const page = () => {
               }) ?? []
             }
             keys={["Account Name", "Wallet Balance", "Account Status"]}
-            spacing={"w-1/4"}
+            spacing={"w-1/3 lg:w-1/4"}
           />
         </div>
         <div className="flex items-center justify-center w-full lg:w-1/2">
@@ -73,7 +73,7 @@ const page = () => {
               }) ?? []
             }
             keys={["Account Name", "Amount", "Transaction Status"]}
-            spacing={"w-1/4"}
+            spacing={"w-1/3 lg:w-1/4"}
           />
         </div>
       </div>

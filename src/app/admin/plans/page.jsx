@@ -82,7 +82,7 @@ const page = () => {
             }) ?? []
           }
           keys={["Plan Name", "Minimum Deposit", "Maximum Deposit", "Features"]}
-          spacing={"w-1/6"}
+          spacing={"w-1/3 lg:w-1/6"}
         />
       </div>
     </>

@@ -15,7 +15,7 @@ const Sidebar = ({ menuState }) => {
     {
       icon: <LuHistory />,
       title: "Transaction History",
-      link: "/user/history",
+      link: "/user/transactions",
     },
     {
       icon: <IoIosWallet />,

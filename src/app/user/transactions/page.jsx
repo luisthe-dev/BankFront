@@ -4,7 +4,6 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { makeMonetaryNumber, makeReadableDate } from "@/handlers/helperHandler";
 import MyTable from "@/components/MyTable";
-import EditUser from "@/components/AdminDashboard/EditUser";
 
 const page = () => {
   const [transactionData, setTransactionData] = useState([]);
