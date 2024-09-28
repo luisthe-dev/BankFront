@@ -112,7 +112,7 @@ const page = () => {
     },
     {
       title: "Instant withdrawal",
-      text: "Withdrawals from Cloud Global Revelout wallet are sent to your external wallet instantly from the time of your withdrawal.",
+      text: "Withdrawals from MAN Investments Inc wallet are sent to your external wallet instantly from the time of your withdrawal.",
     },
     {
       title: "Real Estate",
@@ -124,7 +124,7 @@ const page = () => {
     },
     {
       title: "Investment planning",
-      text: "Your investment multiplies with Cloud Global Revelout, withdraw your profits whenever you want or purchase more plans from them.",
+      text: "Your investment multiplies with MAN Investments Inc, withdraw your profits whenever you want or purchase more plans from them.",
     },
     {
       title: "Skilled management",
@@ -201,7 +201,7 @@ const page = () => {
               <FcBrokenLink size={32} /> About Us
             </span>
             <span className="text-lg font-semibold text-gray-400 w-full text-justify">
-              At Cloud Global Revelout, we stand firm in our belief in
+              At MAN Investments Inc, we stand firm in our belief in
               diversifying investments to offer you a glimpse of the potential
               for passive earnings. With a wealth of experience on board and
               state-of-the-art analytical technologies at our disposal, we are
@@ -221,7 +221,7 @@ const page = () => {
               low risk and swift returns. To attain this, we continuously
               challenge the boundaries of foreign exchange and currency trading
               and employ novel trading strategies to unlock the potential for
-              remarkable profits. At Cloud Global Revelout, we are committed to
+              remarkable profits. At MAN Investments Inc, we are committed to
               creating value for our investors, and the assurance of profit is
               at the core of our commitment. Our aim is to reduce risks and
               ensure a stable and sustainable income for our investors. With the
@@ -245,7 +245,7 @@ const page = () => {
             Be Part Of Something Bigger
           </span>
           <span className="text-lg font-semibold text-gray-400 w-full text-justify">
-            The Cloud Global Revelout visionary team is committed to delivering
+            The MAN Investments Inc visionary team is committed to delivering
             exceptional results, focused being one step ahead. We are building
             an FX trading platform for the long-term, setting up the standard to
             change the fortune of future generations to come! A completely
