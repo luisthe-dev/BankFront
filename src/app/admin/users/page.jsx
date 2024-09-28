@@ -85,13 +85,13 @@ const page = () => {
                   className={`text-md font-medium flex flex-row flex-wrap items-center justify-center gap-2`}
                 >
                   <button
-                    className="bg-green-800 px-3 py-2 rounded-sm"
+                    className="bg-blue-800 px-3 py-2 rounded-sm"
                     onClick={() => setSelectedUser(user)}
                   >
                     Update
                   </button>
                   <button
-                    className="bg-green-800 px-3 py-2 rounded-sm"
+                    className="bg-blue-800 px-3 py-2 rounded-sm"
                     onClick={() => {}}
                   >
                     Block

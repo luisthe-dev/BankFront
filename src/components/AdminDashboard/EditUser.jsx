@@ -17,26 +17,26 @@ const EditUser = ({ user, setUser }) => {
           <input
             type="text"
             placeholder="full name"
-            className="w-full border-b border-green-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
           <input
             type="email"
             placeholder="email address"
-            className="w-full border-b border-green-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
           <input
             type="number"
             placeholder="wallet balance"
-            className="w-full border-b border-green-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
-          <select className="w-full border-b border-green-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none">
+          <select className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none">
             <option selected disabled>
               status
             </option>
             <option value={"active"}> active </option>
             <option value={"blocked"}> blocked </option>
           </select>
-          <button className="bg-green-800 py-4 rounded-md my-4 w-10/12">
+          <button className="bg-blue-800 py-4 rounded-md my-4 w-10/12">
             Update User
           </button>
         </form>

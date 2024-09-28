@@ -35,7 +35,7 @@ const page = () => {
       <div className="w-full flex flex-col lg:flex-row items-center justify-center">
         {stats.map((stat, statKey) => (
           <div
-            className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-green-800"
+            className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-blue-800"
             key={statKey}
           >
             <span className="text-2xl font-extrabold"> {stat.title} </span>

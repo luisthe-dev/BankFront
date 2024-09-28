@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Logo from "@/assets/images/logo.png";
 import Campaign from "@/assets/images/campaign.jpg";
 import People from "@/assets/images/people.jpg";
@@ -12,7 +14,7 @@ import { CiBank } from "react-icons/ci";
 import { PiLightningLight } from "react-icons/pi";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-
+import * as axiosHandler from "@/handlers/axiosHandler";
 
 import BBC from "@/assets/images/bbc.svg";
 import Binance from "@/assets/images/binance.png";
@@ -22,6 +24,7 @@ import Fenbushi from "@/assets/images/fenbushi.png";
 import Rockx from "@/assets/images/rockx.png";
 import Sequoia from "@/assets/images/sequoia.png";
 import Tiger from "@/assets/images/tiger.png";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const logos = [
@@ -34,6 +37,41 @@ const page = () => {
     Sequoia,
     Tiger,
   ];
+
+  const navigation = useRouter();
+
+  const [pricing, setPricing] = useState([]);
+
+  const fetchPlanData = async () => {
+    const allPlans = await axiosHandler.getRequest("/plans");
+
+    if (allPlans.status === "success") {
+      setPricing(
+        allPlans?.data?.map((plan) => {
+          return {
+            title: plan.name,
+            price: `${plan.min_price} - ${plan.max_price}`,
+            items: plan.items,
+          };
+        })
+      );
+    }
+  };
+
+  const submitForm = async (planData) => {
+    const touchPlan = planData.create
+      ? await axiosHandler.postRequest("/plans", planData)
+      : await axiosHandler.putRequest(`/plans/${planData.id}`, planData);
+
+    if (touchPlan.status === "success") {
+      fetchPlanData();
+      setSelectedPlan(null);
+    }
+  };
+
+  useEffect(() => {
+    fetchPlanData();
+  }, []);
 
   const howWorks = [
     {
@@ -89,59 +127,6 @@ const page = () => {
     },
   ];
 
-  const pricing = [
-    {
-      title: "Regular Plan",
-      price: "$500 - $999",
-      items: [
-        "ROI - 5%",
-        "Referral Bonus - 3%",
-        "Withdrawal - Instant",
-        "Customer Support - 24/7",
-      ],
-    },
-    {
-      title: "Standard Plan",
-      price: "$1,000 - $4,999",
-      items: [
-        "ROI - 10%",
-        "Referral Bonus - 3%",
-        "Withdrawal - Instant",
-        "Customer Support - 24/7",
-      ],
-    },
-    {
-      title: "Premium Plan",
-      price: "$5,000 - $9,999",
-      items: [
-        "ROI - 15%",
-        "Referral Bonus - 3%",
-        "Withdrawal - Instant",
-        "Customer Support - 24/7",
-      ],
-    },
-    {
-      title: "Silver Plan",
-      price: "$10,000 - $49,999",
-      items: [
-        "ROI - 20%",
-        "Referral Bonus - 3%",
-        "Withdrawal - Instant",
-        "Customer Support - 24/7",
-      ],
-    },
-    {
-      title: "Gold Plan",
-      price: "$50,000 - Unlimited",
-      items: [
-        "ROI - 25%",
-        "Referral Bonus - 3%",
-        "Withdrawal - Instant",
-        "Customer Support - 24/7",
-      ],
-    },
-  ];
-
   return (
     <>
       <div className="flex flex-col items-center w-full justify-start">
@@ -159,7 +144,7 @@ const page = () => {
               trading offers, Options trading, stocks, derivatives, currency
               pairs.
             </span>
-            <button className="p-4 flex flex-row items-center justify-center gap-2 font-semibold text-md px-10 bg-green-950">
+            <button className="p-4 flex flex-row items-center justify-center gap-2 font-semibold text-md px-10 bg-blue-950">
               Get Started
               <RxArrowTopRight size={20} />
             </button>
@@ -297,7 +282,7 @@ const page = () => {
             higher.
           </span>
           <div className="w-full flex flex-col items-center lg:items-start justify-center lg:w-10/12 py-10">
-            <button className="p-4 flex flex-row items-center justify-center gap-2 font-semibold text-md px-10 bg-green-700">
+            <button className="p-4 flex flex-row items-center justify-center gap-2 font-semibold text-md px-10 bg-blue-700">
               Become a copy trader
               <RxArrowTopRight size={20} />
             </button>
@@ -324,10 +309,13 @@ const page = () => {
                       key={itemKey}
                       className="flex flex-row items-center justify-start gap-2 pl-5 py-1 font-medium text-lg"
                     >
-                      <IoMdCheckmark color={"green"} /> {item}
+                      <IoMdCheckmark color={"blue"} /> {item}
                     </span>
                   ))}
-                  <button className="my-8 p-4 w-full lg:w-10/12 flex flex-row items-center justify-between gap-2 font-light text-md px-5 bg-green-700 text-white">
+                  <button
+                    onClick={() => navigation.push("/auth/signin")}
+                    className="my-8 p-4 w-full lg:w-10/12 flex flex-row items-center justify-between gap-2 font-light text-md px-5 bg-blue-700 text-white"
+                  >
                     Get Started
                     <RxArrowTopRight size={20} />
                   </button>

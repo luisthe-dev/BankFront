@@ -1,14 +1,14 @@
 import {
   axiosErrorHandler,
   axiosResponseHandler,
-  bultixAxios,
+  mainAxios,
 } from "../apis/axios";
 
 export const postRequest = async (url, body, configs) => {
   let responseBody = { status: "failed", message: "" };
 
   try {
-    const postResponse = await bultixAxios.post(url, body, configs);
+    const postResponse = await mainAxios.post(url, body, configs);
     responseBody = await axiosResponseHandler(postResponse);
   } catch (errorResponse) {
     responseBody = await axiosErrorHandler(errorResponse.response);
@@ -21,7 +21,7 @@ export const getRequest = async (url, configs) => {
   let responseBody = { status: "failed", message: "" };
 
   try {
-    const postResponse = await bultixAxios.get(url, configs);
+    const postResponse = await mainAxios.get(url, configs);
     responseBody = await axiosResponseHandler(postResponse);
   } catch (errorResponse) {
     responseBody = await axiosErrorHandler(errorResponse);
@@ -34,7 +34,7 @@ export const putRequest = async (url, body, configs) => {
   let responseBody = { status: "failed", message: "" };
 
   try {
-    const postResponse = await bultixAxios.put(url, body, configs);
+    const postResponse = await mainAxios.put(url, body, configs);
     responseBody = await axiosResponseHandler(postResponse);
   } catch (errorResponse) {
     responseBody = await axiosErrorHandler(errorResponse);
@@ -47,7 +47,7 @@ export const patchRequest = async (url, body, configs) => {
   let responseBody = { status: "failed", message: "" };
 
   try {
-    const postResponse = await bultixAxios.patch(url, body, configs);
+    const postResponse = await mainAxios.patch(url, body, configs);
     responseBody = await axiosResponseHandler(postResponse);
   } catch (errorResponse) {
     responseBody = await axiosErrorHandler(errorResponse);
@@ -60,7 +60,7 @@ export const deleteRequest = async (url, configs) => {
   let responseBody = { status: "failed", message: "" };
 
   try {
-    const postResponse = await bultixAxios.delete(url, configs);
+    const postResponse = await mainAxios.delete(url, configs);
     responseBody = await axiosResponseHandler(postResponse);
   } catch (errorResponse) {
     responseBody = await axiosErrorHandler(errorResponse);

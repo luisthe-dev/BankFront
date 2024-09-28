@@ -108,17 +108,17 @@ const page = () => {
   return (
     <div className="flex flex-col items-start justify-start pt-20 self-stretch w-full">
       <div className="w-full flex flex-col lg:flex-row items-center justify-center">
-        <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-green-800">
+        <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-blue-800">
           <span className="text-2xl font-extrabold"> Total Balance </span>
           <span className="text-5xl font-extralight">
             {makeMonetaryNumber(900000000)}
           </span>
         </div>
-        <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-green-800">
+        <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-blue-800">
           <span className="text-2xl font-extrabold"> Active Plan </span>
           <span className="text-5xl font-extralight">Basic</span>
         </div>
-        <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-green-800">
+        <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-blue-800">
           <span className="text-2xl font-extrabold"> Invested Balance </span>
           <span className="text-5xl font-extralight">
             {makeMonetaryNumber(1800000)}

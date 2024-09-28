@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const EditPlan = ({ plan, setPlan }) => {
+const EditPlan = ({ plan, setPlan, submitAction }) => {
   const [activePlan, setActivePlan] = useState(plan);
 
   return (
@@ -17,6 +17,7 @@ const EditPlan = ({ plan, setPlan }) => {
         <form
           role="form"
           className="w-10/12 flex flex-col items-center self-center justify-center py-3"
+          onSubmit={(e) => e.preventDefault()}
         >
           <input
             type="text"
@@ -25,40 +26,44 @@ const EditPlan = ({ plan, setPlan }) => {
             onInput={(e) =>
               setActivePlan({ ...activePlan, name: e.target.value })
             }
-            className="w-full border-b border-green-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
           <input
             type="number"
             placeholder="minimum deposit"
-            value={activePlan.minPrice}
+            value={activePlan.min_price}
             onInput={(e) =>
-              setActivePlan({ ...activePlan, minPrice: e.target.value })
+              setActivePlan({ ...activePlan, min_price: e.target.value })
             }
-            className="w-full border-b border-green-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
           <input
             type="number"
             placeholder="maximum deposit"
-            value={activePlan.maxPrice}
+            value={activePlan.max_price}
             onInput={(e) =>
-              setActivePlan({ ...activePlan, maxPrice: e.target.value })
+              setActivePlan({ ...activePlan, max_price: e.target.value })
             }
-            className="w-full border-b border-green-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
           <textarea
             type="text"
             placeholder="features (separated with a comma)"
             rows={4}
-            value={activePlan.listItems.join(",")}
+            value={activePlan.items.join(",")}
             onInput={(e) =>
               setActivePlan({
                 ...activePlan,
-                listItems: e.target.value.split(","),
+                items: e.target.value.split(","),
               })
             }
-            className="w-full border-b border-green-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none resize-none"
+            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none resize-none"
           ></textarea>
-          <button className="bg-green-800 py-4 rounded-md my-4 w-10/12">
+          <button
+            className="bg-blue-800 py-4 rounded-md my-4 w-10/12"
+            type="submit"
+            onClick={() => submitAction(activePlan)}
+          >
             {plan.create ? "Create" : "Update"} Plan
           </button>
         </form>

@@ -1,50 +1,59 @@
 "use client";
 
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { makeMonetaryNumber, makeReadableDate } from "@/handlers/helperHandler";
+import React, { useEffect, useState } from "react";
+import { makeMonetaryNumber } from "@/handlers/helperHandler";
 import MyTable from "@/components/MyTable";
-import EditUser from "@/components/AdminDashboard/EditUser";
 import EditPlan from "@/components/AdminDashboard/EditPlan";
+import * as axiosHandler from "@/handlers/axiosHandler";
 
 const page = () => {
   const [planData, setPlanData] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(null);
 
+  const fetchPlanData = async () => {
+    const allPlans = await axiosHandler.getRequest("/plans");
+
+    if (allPlans.status === "success") {
+      setPlanData(allPlans.data);
+    }
+  };
+
+  const submitForm = async (planData) => {
+    const touchPlan = planData.create
+      ? await axiosHandler.postRequest("/plans", planData)
+      : await axiosHandler.putRequest(`/plans/${planData.id}`, planData);
+
+    if (touchPlan.status === "success") {
+      fetchPlanData();
+      setSelectedPlan(null);
+    }
+  };
+
   useEffect(() => {
-    setPlanData([
-      {
-        name: "Gold",
-        minPrice: 9000,
-        maxPrice: 289000,
-        listItems: [
-          "ROI - 15%",
-          "Referral Bonus - 3%",
-          "Withdrawal - Instant",
-          "Customer Support - 24/7",
-        ],
-        create: false,
-      },
-    ]);
+    fetchPlanData();
   }, []);
 
   return (
     <>
       {selectedPlan && (
-        <EditPlan plan={selectedPlan} setPlan={setSelectedPlan} />
+        <EditPlan
+          plan={selectedPlan}
+          setPlan={setSelectedPlan}
+          submitAction={submitForm}
+        />
       )}
       <div className="my-8 flex w-full flex-col items-center justify-start">
         <MyTable
           title={"Investment Plans"}
           actionButton={
             <button
-              className="bg-green-800 px-6 py-3 my-5 rounded-sm"
+              className="bg-blue-800 px-6 py-3 my-5 rounded-sm"
               onClick={() => {
                 setSelectedPlan({
                   name: "",
                   minPrice: null,
                   maxPrice: null,
-                  listItems: [],
+                  items: [],
                   create: true,
                 });
               }}
@@ -56,23 +65,23 @@ const page = () => {
             planData?.map((plan) => {
               return [
                 plan.name,
-                makeMonetaryNumber(plan.minPrice),
-                makeMonetaryNumber(plan.maxPrice),
-                plan.listItems.map(
+                makeMonetaryNumber(plan.min_price),
+                makeMonetaryNumber(plan.max_price),
+                plan?.items?.map(
                   (item, itemKey) =>
-                    `${item}${itemKey + 1 != plan.listItems.length ? ", " : ""}`
+                    `${item}${itemKey + 1 != plan?.items.length ? ", " : ""}`
                 ),
                 <span
                   className={`text-md font-medium flex flex-row flex-wrap items-center justify-center gap-2`}
                 >
                   <button
-                    className="bg-green-800 px-3 py-2 rounded-sm"
+                    className="bg-blue-800 px-3 py-2 rounded-sm"
                     onClick={() => setSelectedPlan(plan)}
                   >
                     Update
                   </button>
                   <button
-                    className="bg-green-800 px-3 py-2 rounded-sm"
+                    className="bg-blue-800 px-3 py-2 rounded-sm"
                     onClick={() => {}}
                   >
                     Delete
