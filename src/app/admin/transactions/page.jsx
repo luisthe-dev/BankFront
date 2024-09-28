@@ -1,105 +1,27 @@
 "use client";
 
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { makeMonetaryNumber, makeReadableDate } from "@/handlers/helperHandler";
+import React, { useEffect, useState } from "react";
+import {
+  makeFirstCharUpper,
+  makeMonetaryNumber,
+} from "@/handlers/helperHandler";
 import MyTable from "@/components/MyTable";
-import EditUser from "@/components/AdminDashboard/EditUser";
+import * as axiosHandler from "@/handlers/axiosHandler";
 
 const page = () => {
   const [transactionData, setTransactionData] = useState([]);
 
+  const fetchTransactionData = async () => {
+    const allTransactions = await axiosHandler.getRequest("/admin/transaction");
+
+    if (allTransactions.status === "success") {
+      setTransactionData(allTransactions?.data);
+    }
+  };
+
   useEffect(() => {
-    setTransactionData([
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-    ]);
+    fetchTransactionData();
   }, []);
 
   return (
@@ -110,10 +32,10 @@ const page = () => {
           data={
             transactionData?.map((transaction) => {
               return [
-                transaction.accountName,
+                makeFirstCharUpper(transaction.user.full_name, " "),
                 transaction.type,
-                makeMonetaryNumber(transaction.amount),
-                transaction.status,
+                makeMonetaryNumber(transaction.total_amount),
+                makeFirstCharUpper(transaction.status),
               ];
             }) ?? []
           }

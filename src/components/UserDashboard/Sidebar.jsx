@@ -27,11 +27,6 @@ const Sidebar = ({ menuState }) => {
       title: "My Referrals",
       link: "/user/referrals",
     },
-    {
-      icon: <RiSettings3Fill />,
-      title: "Settings",
-      link: "/user/settings",
-    },
   ];
 
   return (

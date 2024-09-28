@@ -2,6 +2,8 @@ import Link from "next/link";
 import React from "react";
 import { LuLayoutDashboard, LuHistory, LuUser } from "react-icons/lu";
 import { RiSettings3Fill } from "react-icons/ri";
+import { AiOutlinePause } from "react-icons/ai";
+import { CiCircleList } from "react-icons/ci";
 
 const Sidebar = ({ menuState }) => {
   const menuItems = [
@@ -21,12 +23,12 @@ const Sidebar = ({ menuState }) => {
       link: "/admin/transactions",
     },
     {
-      icon: <LuHistory />,
+      icon: <AiOutlinePause />,
       title: "Pending Transaction",
       link: "/admin/pending",
     },
     {
-      icon: <LuHistory />,
+      icon: <CiCircleList />,
       title: "Investment Plans",
       link: "/admin/plans",
     },

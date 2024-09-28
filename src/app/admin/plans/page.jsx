@@ -8,17 +8,25 @@ import * as axiosHandler from "@/handlers/axiosHandler";
 
 const page = () => {
   const [planData, setPlanData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
 
   const fetchPlanData = async () => {
+    setIsLoading(true);
+
     const allPlans = await axiosHandler.getRequest("/plans");
 
     if (allPlans.status === "success") {
       setPlanData(allPlans.data);
     }
+    setIsLoading(false);
   };
 
   const submitForm = async (planData) => {
+    if (isLoading) return;
+
+    setIsLoading(true);
+
     const touchPlan = planData.create
       ? await axiosHandler.postRequest("/plans", planData)
       : await axiosHandler.putRequest(`/plans/${planData.id}`, planData);
@@ -27,6 +35,19 @@ const page = () => {
       fetchPlanData();
       setSelectedPlan(null);
     }
+    setIsLoading(false);
+  };
+
+  const deletePlan = async (planId) => {
+    if (isLoading) return;
+
+    setIsLoading(true);
+    const deletePlan = await axiosHandler.deleteRequest(`/plans/${planId}`);
+
+    if (deletePlan.status === "success") {
+      fetchPlanData();
+    }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -47,7 +68,10 @@ const page = () => {
           title={"Investment Plans"}
           actionButton={
             <button
-              className="bg-blue-800 px-6 py-3 my-5 rounded-sm"
+              className={`bg-blue-800 px-6 py-3 my-5 rounded-sm ${
+                isLoading ? "opacity-40" : "opacity-100"
+              }`}
+              disabled={isLoading}
               onClick={() => {
                 setSelectedPlan({
                   name: "",
@@ -75,14 +99,20 @@ const page = () => {
                   className={`text-md font-medium flex flex-row flex-wrap items-center justify-center gap-2`}
                 >
                   <button
-                    className="bg-blue-800 px-3 py-2 rounded-sm"
+                    className={`bg-blue-800 px-3 py-2 rounded-sm ${
+                      isLoading ? "opacity-40" : "opacity-100"
+                    }`}
+                    disabled={isLoading}
                     onClick={() => setSelectedPlan(plan)}
                   >
                     Update
                   </button>
                   <button
-                    className="bg-blue-800 px-3 py-2 rounded-sm"
-                    onClick={() => {}}
+                    className={`bg-blue-800 px-3 py-2 rounded-sm ${
+                      isLoading ? "opacity-40" : "opacity-100"
+                    }`}
+                    disabled={isLoading}
+                    onClick={() => deletePlan(plan.id)}
                   >
                     Delete
                   </button>

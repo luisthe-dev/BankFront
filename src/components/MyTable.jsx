@@ -18,7 +18,7 @@ const MyTable = ({ data, title, keys, spacing, actionButton }) => {
               </span>
             ))}
           </div>
-          {data &&
+          {data && data.length > 0 ? (
             data?.map((tableItems, tableItemKey) => (
               <div
                 className="flex flex-row flex-wrap items-start justify-start w-full border-b p-3 px-8 pr-2"
@@ -38,7 +38,12 @@ const MyTable = ({ data, title, keys, spacing, actionButton }) => {
                   </span>
                 ))}
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="flex flex-col items-center justify-center w-full border-b p-3 text-lg font-light">
+              No Results Found
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -1,57 +1,48 @@
 "use client";
 
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { makeMonetaryNumber, makeReadableDate } from "@/handlers/helperHandler";
+import React, { useEffect, useState } from "react";
+import {
+  makeFirstCharUpper,
+  makeMonetaryNumber,
+} from "@/handlers/helperHandler";
 import MyTable from "@/components/MyTable";
-import EditUser from "@/components/AdminDashboard/EditUser";
+import * as axiosHandler from "@/handlers/axiosHandler";
 
 const page = () => {
   const [transactionData, setTransactionData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchTransactionData = async () => {
+    setIsLoading(true);
+    const allTransactions = await axiosHandler.getRequest(
+      "/admin/transaction/status/pending_confirmation"
+    );
+
+    if (allTransactions.status === "success") {
+      setTransactionData(allTransactions?.data);
+    }
+    setIsLoading(false);
+  };
+
+  const updateTransactionStatus = async (newStatus, transactionId) => {
+    if (isLoading) return;
+
+    setIsLoading(true);
+    const allTransactions = await axiosHandler.putRequest(
+      `/admin/transaction/status/${transactionId}`,
+      {
+        status: newStatus,
+      }
+    );
+
+    if (allTransactions.status === "success") {
+      fetchTransactionData();
+    }
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    setTransactionData([
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Deposit" : "Withdrawal",
-        accountName: "Naced",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Deposit" : "Withdrawal",
-        accountName: "Naced",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Deposit" : "Withdrawal",
-        accountName: "Naced",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Deposit" : "Withdrawal",
-        accountName: "Naced",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Deposit" : "Withdrawal",
-        accountName: "Naced",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Deposit" : "Withdrawal",
-        accountName: "Naced",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Deposit" : "Withdrawal",
-        accountName: "Naced",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Deposit" : "Withdrawal",
-        accountName: "Naced",
-      },
-    ]);
+    fetchTransactionData();
   }, []);
 
   return (
@@ -62,21 +53,34 @@ const page = () => {
           data={
             transactionData?.map((transaction) => {
               return [
-                transaction.accountName,
+                makeFirstCharUpper(transaction.user.full_name, " "),
                 transaction.type,
-                makeMonetaryNumber(transaction.amount),
+                makeMonetaryNumber(transaction.total_amount),
                 <span
                   className={`text-md font-medium flex flex-row flex-wrap items-center justify-center gap-2`}
                 >
                   <button
-                    className="bg-blue-800 px-3 py-2 rounded-sm"
-                    onClick={() => {}}
+                    className={`bg-blue-800 px-3 py-2 rounded-sm ${
+                      isLoading ? "opacity-40" : "opacity-100"
+                    }`}
+                    disabled={isLoading}
+                    onClick={() =>
+                      updateTransactionStatus(
+                        "payment_successful",
+                        transaction.id
+                      )
+                    }
                   >
                     Approve
                   </button>
                   <button
-                    className="bg-blue-800 px-3 py-2 rounded-sm"
-                    onClick={() => {}}
+                    className={`bg-blue-800 px-3 py-2 rounded-sm ${
+                      isLoading ? "opacity-40" : "opacity-100"
+                    }`}
+                    disabled={isLoading}
+                    onClick={() =>
+                      updateTransactionStatus("payment_failed", transaction.id)
+                    }
                   >
                     Decline
                   </button>

@@ -1,34 +1,63 @@
 "use client";
 
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "chart.js/auto";
-import { makeMonetaryNumber, makeReadableDate } from "@/handlers/helperHandler";
+import {
+  makeFirstCharUpper,
+  makeMonetaryNumber,
+} from "@/handlers/helperHandler";
 import MyTable from "@/components/MyTable";
+import * as axiosHandler from "@/handlers/axiosHandler";
 
 const page = () => {
-  const [stats, setStats] = useState([
-    {
-      title: "Total Users",
-      count: 9000,
-    },
-    {
-      title: "Total Transactions",
-      count: 250,
-    },
-    {
-      title: "Total Wallet Balance",
-      count: makeMonetaryNumber(90000),
-    },
-  ]);
+  const [stats, setStats] = useState([]);
 
-  const [users, setUsers] = useState([
-    {
-      name: "Check Nado",
-      balance: 90000,
-      status: "Blocked",
-    },
-  ]);
+  const [users, setUsers] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+
+  const fetchStats = async () => {
+    const allStats = await axiosHandler.getRequest("/admin/stats");
+
+    if (allStats.status === "success") {
+      setStats([
+        {
+          title: "Total Users",
+          count: allStats.data.users,
+        },
+        {
+          title: "Total Transactions",
+          count: allStats.data.transactions,
+        },
+        {
+          title: "Total Wallet Balance",
+          count: makeMonetaryNumber(allStats.data.total_wallet),
+        },
+      ]);
+    }
+  };
+
+  const fetchUserData = async () => {
+    const allUsers = await axiosHandler.getRequest("/admin/user");
+
+    if (allUsers.status === "success") {
+      setUsers(allUsers?.data);
+    }
+  };
+
+  const fetchTransactionData = async () => {
+    const allTransactions = await axiosHandler.getRequest("/admin/transaction");
+
+    if (allTransactions.status === "success") {
+      setTransactions(allTransactions?.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+    fetchStats();
+    fetchTransactionData();
+  }, []);
 
   return (
     <div className="flex flex-col items-start justify-start pt-20 self-stretch w-full">
@@ -43,15 +72,15 @@ const page = () => {
           </div>
         ))}
       </div>
-      <div className="my-8 flex w-full flex-col lg:flex-row gap-y-12 py-12 items-center justify-start">
+      <div className="my-8 flex w-full flex-col lg:flex-row gap-y-12 py-12 items-start justify-start">
         <div className="flex items-center justify-center w-full lg:w-1/2">
           <MyTable
             title={"Top Active Users"}
             data={
               users?.map((user) => {
                 return [
-                  user.name,
-                  makeMonetaryNumber(user.balance),
+                  makeFirstCharUpper(user.full_name, " "),
+                  makeMonetaryNumber(user.total_wallet_balance),
                   user.status,
                 ];
               }) ?? []
@@ -64,16 +93,17 @@ const page = () => {
           <MyTable
             title={"Recent Transactions"}
             data={
-              users?.map((user) => {
+              transactions?.map((transaction) => {
                 return [
-                  user.name,
-                  makeMonetaryNumber(user.balance),
-                  user.status,
+                  makeFirstCharUpper(transaction.user.full_name, " "),
+                  makeFirstCharUpper(transaction.type),
+                  makeMonetaryNumber(transaction.total_amount),
+                  makeFirstCharUpper(transaction.status),
                 ];
               }) ?? []
             }
-            keys={["Account Name", "Amount", "Transaction Status"]}
-            spacing={"w-1/3 lg:w-1/4"}
+            keys={["Account Name", "Type", "Amount", "Transaction Status"]}
+            spacing={"w-1/3 lg:w-1/5"}
           />
         </div>
       </div>

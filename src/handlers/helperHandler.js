@@ -9,4 +9,17 @@ export const makeReadableDate = (date) =>
   });
 
 export const makeMonetaryNumber = (number) =>
-  `$${Number(number ?? 0).toLocaleString()}`;
+  Number(number ?? 0) ? `$${Number(number ?? 0).toLocaleString()}` : number;
+
+export const makeFirstCharUpper = (mainString, separator = "_") =>
+  mainString
+    .split(separator)
+    .map((string) =>
+      string
+        .split("")
+        .map((char, charKey) =>
+          charKey === 0 ? char.toUpperCase() : char.toLowerCase()
+        )
+        .join("")
+    )
+    .join(" ");
