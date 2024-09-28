@@ -25,6 +25,7 @@ import Rockx from "@/assets/images/rockx.png";
 import Sequoia from "@/assets/images/sequoia.png";
 import Tiger from "@/assets/images/tiger.png";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const page = () => {
   const logos = [
@@ -41,6 +42,7 @@ const page = () => {
   const navigation = useRouter();
 
   const [pricing, setPricing] = useState([]);
+  const [coinsData, setCoinsData] = useState([]);
 
   const fetchPlanData = async () => {
     const allPlans = await axiosHandler.getRequest("/plans");
@@ -58,19 +60,26 @@ const page = () => {
     }
   };
 
-  const submitForm = async (planData) => {
-    const touchPlan = planData.create
-      ? await axiosHandler.postRequest("/plans", planData)
-      : await axiosHandler.putRequest(`/plans/${planData.id}`, planData);
+  const getMarketData = async () => {
+    const data = await axios.get(
+      "https://api.coingecko.com/api/v3/coins/markets",
+      {
+        params: {
+          per_page: 10,
+          vs_currency: "USD",
+          x_cg_demo_api_key: "CG-sNijLgUSVuoaXP7BEit3KXTn",
+        },
+      }
+    );
 
-    if (touchPlan.status === "success") {
-      fetchPlanData();
-      setSelectedPlan(null);
+    if (data.status == 200) {
+      setCoinsData(data.data);
     }
   };
 
   useEffect(() => {
     fetchPlanData();
+    getMarketData();
   }, []);
 
   const howWorks = [
@@ -152,6 +161,22 @@ const page = () => {
           <div className="flex flex-col items-center justify-center p-2 w-full lg:w-7/12">
             <Image src={Campaign} alt="Welcome" />
           </div>
+        </div>
+        <div className="bg-gray-700 w-full p-10 flex flex-row items-center justify-start overflow-x-scroll gap-6">
+          {coinsData.map((coin, coinKey) => (
+            <span
+              className="flex flex-row items-center justify-center gap-3 pl-4 ml-4"
+              key={coinKey}
+            >
+              <Image src={coin.image} width={40} height={40} />
+              <span className="flex flex-col items-start justify-center">
+                <span className="text-md font-bold"> {coin.name} </span>
+                <span className="text-2xl font-extralight">
+                  {coin.current_price}
+                </span>
+              </span>
+            </span>
+          ))}
         </div>
         <div className="flex flex-col items-center justify-center py-16 px-12 w-full bg-white">
           <span className="py-10 text-3xl font-semibold text-black">
