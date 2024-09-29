@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Deposit = ({ setDeposit, paymentMethods }) => {
+const Deposit = ({ setDeposit, paymentMethods, submitAction }) => {
   const [depositData, setDepositData] = useState({
     amount: "",
     payment_method: null,
@@ -18,14 +18,20 @@ const Deposit = ({ setDeposit, paymentMethods }) => {
         <form
           role="form"
           className="w-10/12 flex flex-col items-center self-center justify-center py-3"
+          onSubmit={(e) => e.preventDefault()}
         >
           <input
             type="number"
             placeholder="deposit amount"
+            value={depositData.amount}
+            onInput={(e) =>
+              setDepositData({ ...depositData, amount: e.target.value })
+            }
             className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
           <select
             className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            defaultValue={""}
             onChange={(e) =>
               setDepositData({ ...depositData, payment_method: e.target.value })
             }
@@ -34,8 +40,8 @@ const Deposit = ({ setDeposit, paymentMethods }) => {
               payment method
             </option>
             {paymentMethods.map((paymentMethod, paymentMethodKey) => (
-              <option value={paymentMethod.title} key={paymentMethodKey}>
-                {paymentMethod.title}
+              <option value={paymentMethod.name} key={paymentMethodKey}>
+                {paymentMethod.name}
               </option>
             ))}
           </select>
@@ -45,14 +51,25 @@ const Deposit = ({ setDeposit, paymentMethods }) => {
               placeholder="deposit amount"
               value={
                 paymentMethods.filter(
-                  (method) => method.title === depositData.payment_method
+                  (method) => method.name === depositData.payment_method
                 )[0]?.value ?? ""
               }
               readOnly
               className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
             />
           )}
-          <button className="bg-blue-800 py-4 rounded-md my-4 w-10/12">
+          <button
+            className="bg-blue-800 py-4 rounded-md my-4 w-10/12"
+            disabled={depositData.payment_method == null}
+            onClick={() =>
+              submitAction({
+                amount: depositData.amount,
+                narration: `Deposit ${depositData.amount} To Main Wallet`,
+                type: "credit",
+                extra: depositData.payment_method,
+              })
+            }
+          >
             I have made the transfer
           </button>
         </form>

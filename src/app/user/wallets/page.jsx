@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { IoIosWallet } from "react-icons/io";
 import { makeMonetaryNumber } from "@/handlers/helperHandler";
-import { useRouter } from "next/navigation";
-import MyTable from "@/components/MyTable";
 import { FaArrowRightLong, FaCheck } from "react-icons/fa6";
 import Deposit from "@/components/UserDashboard/Deposit";
+import * as axiosHandler from "@/handlers/axiosHandler";
+import { getSessionItem } from "@/handlers/sessionHandler";
 
 const page = () => {
   const [deposit, setDeposit] = useState(false);
@@ -75,31 +75,44 @@ const page = () => {
     },
   ];
 
+  const fetchSettingData = async () => {
+    const allPlans = await axiosHandler.getRequest("/settings");
+
+    if (allPlans.status === "success") {
+      setPaymentMethods(allPlans.data);
+    }
+  };
+
+  const submitAction = async (submitData) => {
+    const allPlans = await axiosHandler.postRequest(
+      "/transaction",
+      submitData,
+      {
+        headers: {
+          Authorization: `Bearer ${getSessionItem("userAuth")}`,
+        },
+      }
+    );
+
+    if (allPlans.status === "success") {
+      window.alert(
+        "Deposit Successfully. You will be notified once verification is completed"
+      );
+    }
+  };
+
   useEffect(() => {
-    setPaymentMethods([
-      {
-        title: "Bitcoin",
-        value: "ernojgwnojenrg",
-      },
-      {
-        title: "Toncoin",
-        value: "ernojgwnojenrg",
-      },
-      {
-        title: "USDT",
-        value: "ernojgwnojenrg",
-      },
-      {
-        title: "Ethereum",
-        value: "ernojgwnojenrg",
-      },
-    ]);
+    fetchSettingData();
   }, []);
 
   return (
     <>
       {deposit && (
-        <Deposit setDeposit={setDeposit} paymentMethods={paymentMethods} />
+        <Deposit
+          setDeposit={setDeposit}
+          paymentMethods={paymentMethods}
+          submitAction={submitAction}
+        />
       )}
       <div className="w-full flex flex-col gap-5 items-start justify-start lg:p-4">
         <div className="flex flex-col lg:flex-row flex-wrap items-center justify-start gap-10 w-full p-3 lg:p-10">
