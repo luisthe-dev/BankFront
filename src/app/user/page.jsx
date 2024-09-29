@@ -3,12 +3,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { makeMonetaryNumber } from "@/handlers/helperHandler";
+import Carousel from "@/components/UserDashboard/Carousel";
 import dynamic from "next/dynamic";
 
 const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const page = () => {
   const [coinsData, setCoinsData] = useState([]);
+  const [cards, setCards] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState(null);
   const [coinData, setCoinData] = useState(null);
   const [chartOptions, setChartOptions] = useState({
@@ -125,6 +127,13 @@ const page = () => {
           </span>
         </div>
       </div>
+     <Carousel
+          coinsData={coinsData}
+          selectedCoin={selectedCoin}
+          selectSingleCoin={selectSingleCoin}
+          makeMonetaryNumber={makeMonetaryNumber} // Pass the function as a prop
+        />
+   
       <div className="w-full items-start justify-start flex flex-col lg:flex-row gap-10">
         <div
           className="w-full lg:w-9/12 px-5 my-3 flex flex-col items-center justify-center"
