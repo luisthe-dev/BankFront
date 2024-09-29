@@ -8,8 +8,7 @@ import { FaArrowRightLong, FaCheck } from "react-icons/fa6";
 import Deposit from "@/components/UserDashboard/Deposit";
 
 const page = () => {
-  const [transactionData, setTransactionData] = useState([]);
-  const [deposit, setDeposit] = useState(true);
+  const [deposit, setDeposit] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState([]);
 
   const plans = [
@@ -68,7 +67,7 @@ const page = () => {
   const accountActions = [
     {
       action: "Deposit",
-      onclick: () => {},
+      onclick: () => setDeposit(true),
     },
     {
       action: "Withdraw",
@@ -77,56 +76,6 @@ const page = () => {
   ];
 
   useEffect(() => {
-    setTransactionData([
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        desc: "Naced",
-        status: "Pending",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        desc: "Naced",
-        status: "Pending",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        desc: "Naced",
-        status: "Pending",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        desc: "Naced",
-        status: "Pending",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        desc: "Naced",
-        status: "Pending",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        desc: "Naced",
-        status: "Pending",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        desc: "Naced",
-        status: "Pending",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        desc: "Naced",
-        status: "Pending",
-      },
-    ]);
     setPaymentMethods([
       {
         title: "Bitcoin",
@@ -149,7 +98,9 @@ const page = () => {
 
   return (
     <>
-      <Deposit setDeposit={setDeposit} paymentMethods={paymentMethods} />
+      {deposit && (
+        <Deposit setDeposit={setDeposit} paymentMethods={paymentMethods} />
+      )}
       <div className="w-full flex flex-col gap-5 items-start justify-start lg:p-4">
         <div className="flex flex-col lg:flex-row flex-wrap items-center justify-start gap-10 w-full p-3 lg:p-10">
           <div className="flex flex-row flex-grow items-start justify-start gap-3 shadow-md border border-blue-800 p-5 rounded-md w-full lg:w-3/12">

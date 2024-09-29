@@ -32,7 +32,7 @@ const layout = ({ children }) => {
       <Header menuHandler={setOpenMenu} menuState={openMenu} />
       <div className="flex flex-row h-full">
         <div
-          className={`flex absolute z-30 lg:relative bg-black h-full border-e transition-all ease-in-out duration-700 items-center py-6 justify-center ${
+          className={`flex absolute z-20 lg:static bg-black h-full border-e transition-all ease-in-out duration-700 items-center py-6 justify-center ${
             openMenu ? "w-60" : "w-20 -left-64 lg:left-0"
           }`}
         >
