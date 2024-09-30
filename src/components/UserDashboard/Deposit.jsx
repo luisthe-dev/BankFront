@@ -7,9 +7,9 @@ const Deposit = ({ setDeposit, paymentMethods, submitAction }) => {
   });
 
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-screen p-8 flex flex-col items-center justify-center">
+    <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen p-8 flex flex-col items-center justify-center">
       <div
-        className="absolute top-0 left-0 right-0 bottom-0 z-30  bg-[#92b8a676]"
+        className="fixed top-0 left-0 right-0 bottom-0 z-30 bg-[#92b8a676]"
         onClick={() => setDeposit(false)}
       ></div>
       <div className="flex w-full lg:w-5/12 flex-col items-start justify-start p-4 py-12 bg-black rounded-md z-40">

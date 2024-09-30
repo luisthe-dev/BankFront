@@ -23,11 +23,6 @@ const Sidebar = ({ menuState }) => {
       title: "My Wallets & Plan",
       link: "/user/wallets",
     },
-    {
-      icon: <PiUsersFour />,
-      title: "My Referrals",
-      link: "/user/referrals",
-    },
   ];
 
   return (

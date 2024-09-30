@@ -1,4 +1,4 @@
-export const makeReadableDate = (date) =>
+export const makeReadableDate = (date = new Date()) =>
   new Date(date).toLocaleDateString("en-us", {
     year: "numeric",
     month: "short",
@@ -8,10 +8,10 @@ export const makeReadableDate = (date) =>
     second: "2-digit",
   });
 
-export const makeMonetaryNumber = (number) =>
-  Number(number ?? 0) ? `$${Number(number ?? 0).toLocaleString()}` : number;
+export const makeMonetaryNumber = (number = 0) =>
+  Number(number) ? `$${Number(number).toLocaleString()}` : number;
 
-export const makeFirstCharUpper = (mainString, separator = "_") =>
+export const makeFirstCharUpper = (mainString = "", separator = "_") =>
   mainString
     .split(separator)
     .map((string) =>

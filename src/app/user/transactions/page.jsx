@@ -1,104 +1,31 @@
 "use client";
 
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { makeMonetaryNumber, makeReadableDate } from "@/handlers/helperHandler";
+import React, { useEffect, useState } from "react";
+import {
+  makeFirstCharUpper,
+  makeMonetaryNumber,
+} from "@/handlers/helperHandler";
 import MyTable from "@/components/MyTable";
+import * as axiosHandler from "@/handlers/axiosHandler";
+import { getSessionItem } from "@/handlers/sessionHandler";
 
 const page = () => {
   const [transactionData, setTransactionData] = useState([]);
 
+  const fetchPlanData = async () => {
+    const allPlans = await axiosHandler.getRequest("/user/history", {
+      headers: {
+        Authorization: `Bearer ${getSessionItem("userAuth")}`,
+      },
+    });
+
+    if (allPlans.status === "success") {
+      setTransactionData(allPlans.data);
+    }
+  };
+
   useEffect(() => {
-    setTransactionData([
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-      {
-        amount: (Math.random() * 1000).toFixed(2),
-        type: Math.random() < 0.5 ? "Credit" : "Debit",
-        accountName: "Naced",
-        status:
-          Math.random() < 0.5
-            ? "Pending"
-            : Math.random() < 0.5
-            ? "Failed"
-            : "Success",
-      },
-    ]);
+    fetchPlanData();
   }, []);
 
   return (
@@ -108,11 +35,12 @@ const page = () => {
           title={"Transactions"}
           data={
             transactionData?.map((transaction) => {
+              console.log(transaction);
               return [
-                transaction.accountName,
-                transaction.type,
-                makeMonetaryNumber(transaction.amount),
-                transaction.status,
+                makeFirstCharUpper(transaction.user.full_name, " "),
+                makeFirstCharUpper(transaction.type),
+                makeMonetaryNumber(transaction.total_amount),
+                makeFirstCharUpper(transaction.status),
               ];
             }) ?? []
           }

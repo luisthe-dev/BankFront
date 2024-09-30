@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { makeMonetaryNumber } from "@/handlers/helperHandler";
 import Carousel from "@/components/UserDashboard/Carousel";
 import dynamic from "next/dynamic";
+import { getSessionItem } from "@/handlers/sessionHandler";
 
 const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -13,6 +14,7 @@ const page = () => {
   const [cards, setCards] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState(null);
   const [coinData, setCoinData] = useState(null);
+  const [userData, setUserData] = useState({});
   const [chartOptions, setChartOptions] = useState({
     chart: {
       type: "candlestick",
@@ -105,6 +107,7 @@ const page = () => {
 
   useEffect(() => {
     getMarketData();
+    setUserData(JSON.parse(getSessionItem("userData")));
   }, []);
 
   return (
@@ -115,17 +118,17 @@ const page = () => {
         <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 bg-[#EA6A47] text-white shadow-lg rounded-lg border border-[#EA6A47]">
           <span className="text-2xl font-extrabold">Total Balance</span>
           <span className="text-5xl font-extralight">
-            {makeMonetaryNumber(900000000)}
+            {makeMonetaryNumber(userData.total_wallet_balance ?? 0)}
           </span>
         </div>
         <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 bg-[#0091D5] text-white shadow-lg rounded-lg border border-[#0091D5]">
           <span className="text-2xl font-extrabold">Active Plan</span>
-          <span className="text-5xl font-extralight">Basic</span>
+          <span className="text-5xl font-extralight">None</span>
         </div>
         <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 bg-[#A5D8DD] text-white shadow-lg rounded-lg border border-[#A5D8DD]">
           <span className="text-2xl font-extrabold">Invested Balance</span>
           <span className="text-5xl font-extralight">
-            {makeMonetaryNumber(1800000)}
+            {makeMonetaryNumber(0)}
           </span>
         </div>
       </div>

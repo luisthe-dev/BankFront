@@ -26,6 +26,7 @@ import Sequoia from "@/assets/images/sequoia.png";
 import Tiger from "@/assets/images/tiger.png";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { makeMonetaryNumber } from "@/handlers/helperHandler";
 
 const page = () => {
   const logos = [
@@ -52,7 +53,9 @@ const page = () => {
         allPlans?.data?.map((plan) => {
           return {
             title: plan.name,
-            price: `${plan.min_price} - ${plan.max_price}`,
+            price: `${makeMonetaryNumber(
+              plan.min_price
+            )} - ${makeMonetaryNumber(plan.max_price)}`,
             items: plan.items,
           };
         })

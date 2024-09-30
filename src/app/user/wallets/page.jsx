@@ -6,63 +6,33 @@ import { FaArrowRightLong, FaCheck } from "react-icons/fa6";
 import Deposit from "@/components/UserDashboard/Deposit";
 import * as axiosHandler from "@/handlers/axiosHandler";
 import { getSessionItem } from "@/handlers/sessionHandler";
+import Withdraw from "@/components/UserDashboard/Withdraw";
 
 const page = () => {
   const [deposit, setDeposit] = useState(false);
+  const [withdraw, setWithdraw] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState([]);
+  const [userData, setUserData] = useState({});
 
-  const plans = [
-    {
-      title: "Regular Plan",
-      price: "$500 - $999",
-      items: [
-        "ROI - 5%",
-        "Referral Bonus - 3%",
-        "Withdrawal - Instant",
-        "Customer Support - 24/7",
-      ],
-    },
-    {
-      title: "Standard Plan",
-      price: "$1,000 - $4,999",
-      items: [
-        "ROI - 10%",
-        "Referral Bonus - 3%",
-        "Withdrawal - Instant",
-        "Customer Support - 24/7",
-      ],
-    },
-    {
-      title: "Premium Plan",
-      price: "$5,000 - $9,999",
-      items: [
-        "ROI - 15%",
-        "Referral Bonus - 3%",
-        "Withdrawal - Instant",
-        "Customer Support - 24/7",
-      ],
-    },
-    {
-      title: "Silver Plan",
-      price: "$10,000 - $49,999",
-      items: [
-        "ROI - 20%",
-        "Referral Bonus - 3%",
-        "Withdrawal - Instant",
-        "Customer Support - 24/7",
-      ],
-    },
-    {
-      title: "Gold Plan",
-      price: "$50,000 - Unlimited",
-      items: [
-        "ROI - 25%",
-        "Referral Bonus - 3%",
-        "Withdrawal - Instant",
-        "Customer Support - 24/7",
-      ],
-    },
-  ];
+  const [plans, setPlans] = useState([]);
+
+  const fetchPlanData = async () => {
+    const allPlans = await axiosHandler.getRequest("/plans");
+
+    if (allPlans.status === "success") {
+      setPlans(
+        allPlans?.data?.map((plan) => {
+          return {
+            title: plan.name,
+            price: `${makeMonetaryNumber(
+              plan.min_price
+            )} - ${makeMonetaryNumber(plan.max_price)}`,
+            items: plan.items,
+          };
+        })
+      );
+    }
+  };
 
   const accountActions = [
     {
@@ -71,7 +41,7 @@ const page = () => {
     },
     {
       action: "Withdraw",
-      onclick: () => {},
+      onclick: () => setWithdraw(true),
     },
   ];
 
@@ -96,13 +66,15 @@ const page = () => {
 
     if (allPlans.status === "success") {
       window.alert(
-        "Deposit Successfully. You will be notified once verification is completed"
+        "Transaction Successful. You will be notified once verification is completed"
       );
     }
   };
 
   useEffect(() => {
+    fetchPlanData();
     fetchSettingData();
+    setUserData(JSON.parse(getSessionItem("userData")));
   }, []);
 
   return (
@@ -110,6 +82,13 @@ const page = () => {
       {deposit && (
         <Deposit
           setDeposit={setDeposit}
+          paymentMethods={paymentMethods}
+          submitAction={submitAction}
+        />
+      )}
+      {withdraw && (
+        <Withdraw
+          setWithdraw={setWithdraw}
           paymentMethods={paymentMethods}
           submitAction={submitAction}
         />
@@ -122,7 +101,7 @@ const page = () => {
             </div>
             <div className="flex flex-col p-4 pe-1 gap-2">
               <span className="text-2xl font-medium">
-                {makeMonetaryNumber(900000000)}
+                {makeMonetaryNumber(userData.total_wallet_balance ?? 0)}
               </span>
               <span className="text-md font-light"> Total Balance </span>
             </div>
@@ -132,7 +111,7 @@ const page = () => {
               <IoIosWallet size={48} />
             </div>
             <div className="flex flex-col p-4 pe-1 gap-2">
-              <span className="text-2xl font-medium">Basic</span>
+              <span className="text-2xl font-medium">None</span>
               <span className="text-md font-light"> Active Plan </span>
             </div>
           </div>
@@ -142,7 +121,7 @@ const page = () => {
             </div>
             <div className="flex flex-col p-4 pe-1 gap-2">
               <span className="text-2xl font-medium">
-                {makeMonetaryNumber(1800000)}
+                {makeMonetaryNumber(0)}
               </span>
               <span className="text-md font-light"> Invested Balance </span>
             </div>
