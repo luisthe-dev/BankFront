@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Deposit = ({ setDeposit, paymentMethods, submitAction }) => {
+const Deposit = ({ setDeposit, paymentMethods, submitAction, isLoading }) => {
   const [depositData, setDepositData] = useState({
     amount: "",
     payment_method: null,
@@ -59,8 +59,12 @@ const Deposit = ({ setDeposit, paymentMethods, submitAction }) => {
             />
           )}
           <button
-            className="bg-blue-800 py-4 rounded-md my-4 w-10/12"
-            disabled={depositData.payment_method == null}
+            className={`bg-blue-800 py-4 rounded-md my-4 w-10/12 ${
+              depositData.payment_method == null || isLoading
+                ? "opacity-40"
+                : "opacity-100"
+            }`}
+            disabled={depositData.payment_method == null || isLoading}
             onClick={() =>
               submitAction({
                 amount: depositData.amount,

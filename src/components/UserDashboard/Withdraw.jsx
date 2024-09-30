@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Withdraw = ({ setWithdraw, paymentMethods, submitAction }) => {
+const Withdraw = ({ setWithdraw, paymentMethods, submitAction, isLoading }) => {
   const [withdrawData, setWithdrawData] = useState({
     amount: "",
     payment_method: "",
@@ -69,13 +69,15 @@ const Withdraw = ({ setWithdraw, paymentMethods, submitAction }) => {
           <button
             className={`bg-blue-800 py-4 rounded-md my-4 w-10/12 ${
               withdrawData.payment_method == "" ||
-              withdrawData.withdraw_address == ""
+              withdrawData.withdraw_address == "" ||
+              isLoading
                 ? "opacity-40"
                 : "opacity-100"
             }`}
             disabled={
               withdrawData.payment_method == "" ||
-              withdrawData.withdraw_address == ""
+              withdrawData.withdraw_address == "" ||
+              isLoading
             }
             onClick={() =>
               submitAction({

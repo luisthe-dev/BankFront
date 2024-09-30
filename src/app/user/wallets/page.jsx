@@ -13,6 +13,7 @@ const page = () => {
   const [withdraw, setWithdraw] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [userData, setUserData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const [plans, setPlans] = useState([]);
 
@@ -54,6 +55,7 @@ const page = () => {
   };
 
   const submitAction = async (submitData) => {
+    setIsLoading(true);
     const allPlans = await axiosHandler.postRequest(
       "/transaction",
       submitData,
@@ -68,7 +70,9 @@ const page = () => {
       window.alert(
         "Transaction Successful. You will be notified once verification is completed"
       );
+      window.location.reload();
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -82,6 +86,7 @@ const page = () => {
       {deposit && (
         <Deposit
           setDeposit={setDeposit}
+          isLoading={isLoading}
           paymentMethods={paymentMethods}
           submitAction={submitAction}
         />
@@ -89,6 +94,7 @@ const page = () => {
       {withdraw && (
         <Withdraw
           setWithdraw={setWithdraw}
+          isLoading={isLoading}
           paymentMethods={paymentMethods}
           submitAction={submitAction}
         />
@@ -162,7 +168,10 @@ const page = () => {
                         <FaCheck /> {items}
                       </span>
                     ))}
-                  <button className="p-4 flex flex-row w-full items-center justify-between gap-2 font-semibold text-sm px-3 my-5 bg-transparent hover:bg-blue-700 border border-blue-900 border-solid rounded-md">
+                  <button
+                    onClick={() => setDeposit(true)}
+                    className="p-4 flex flex-row w-full items-center justify-between gap-2 font-semibold text-sm px-3 my-5 bg-transparent hover:bg-blue-700 border border-blue-900 border-solid rounded-md"
+                  >
                     Choose Plan <FaArrowRightLong />
                   </button>
                 </div>

@@ -2,7 +2,13 @@
 
 import Header from "@/components/UserDashboard/Header";
 import Sidebar from "@/components/UserDashboard/Sidebar";
+import {
+  createSessionItem,
+  getSessionItem,
+  trashSession,
+} from "@/handlers/sessionHandler";
 import { usePathname, useRouter } from "next/navigation";
+import * as axiosHandler from "@/handlers/axiosHandler";
 import React, { useEffect, useState } from "react";
 
 const layout = ({ children }) => {
@@ -11,6 +17,32 @@ const layout = ({ children }) => {
 
   const pathName = usePathname();
   const navigator = useRouter();
+
+  const verifyUser = async () => {
+    const userToken = getSessionItem("userAuth");
+
+    if (!userToken) {
+      navigator.push("/signin");
+      return;
+    }
+
+    const userResponse = await axiosHandler.getRequest("/user", {
+      headers: {
+        Authorization: `Bearer ${getSessionItem("userAuth")}`,
+      },
+    });
+
+    if (
+      userResponse.status == "failed" &&
+      userResponse.message == "Unauthenticated"
+    ) {
+      trashSession();
+      navigator.push("/auth/signin");
+      return;
+    }
+
+    createSessionItem("userData", JSON.stringify(userResponse.data));
+  };
 
   const trackPages = async () => {
     if (currentPage != pathName) {
@@ -21,6 +53,7 @@ const layout = ({ children }) => {
 
   useEffect(() => {
     trackPages();
+    verifyUser();
   }, [pathName]);
 
   useEffect(() => {
