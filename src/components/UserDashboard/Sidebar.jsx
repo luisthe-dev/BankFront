@@ -1,11 +1,12 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { LuLayoutDashboard, LuHistory } from "react-icons/lu";
-import { RiSettings3Fill } from "react-icons/ri";
 import { IoIosWallet } from "react-icons/io";
 import { PiUsersFour } from "react-icons/pi";
 
 const Sidebar = ({ menuState }) => {
+  const [activeIndex, setActiveIndex] = useState(null);
+
   const menuItems = [
     {
       icon: <LuLayoutDashboard />,
@@ -35,9 +36,12 @@ const Sidebar = ({ menuState }) => {
         <Link
           href={menuItem.link}
           key={menuKey}
+          onClick={() => setActiveIndex(menuKey)} // Set active index on click
           className={`flex flex-row items-center ${
             menuState ? "justify-start pl-5" : "justify-center pl-0"
-          } gap-2 border-b my-1 pt-5 pb-6 w-full relative transition-all ease-in-out duration-900`}
+          } gap-2 my-1 pt-5 pb-6 w-full relative transition-all ease-in-out duration-900 ${
+            activeIndex === menuKey ? "bg-blue-600" : "bg-transparent"
+          } text-white`} // Set text color to white always
         >
           <span className="text-2xl">{menuItem.icon}</span>
           <span

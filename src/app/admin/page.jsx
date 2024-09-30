@@ -61,10 +61,12 @@ const page = () => {
 
   return (
     <div className="flex flex-col items-start justify-start pt-20 self-stretch w-full">
-      <div className="w-full flex flex-col lg:flex-row items-center justify-center">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-4">
+        {" "}
+        {}
         {stats.map((stat, statKey) => (
           <div
-            className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-blue-800"
+            className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 bg-[#EA6A47] text-white shadow-lg rounded-lg border border-[#EA6A47]"
             key={statKey}
           >
             <span className="text-2xl font-extrabold"> {stat.title} </span>

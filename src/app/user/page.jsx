@@ -109,31 +109,34 @@ const page = () => {
 
   return (
     <div className="flex flex-col items-start justify-start pt-20 self-stretch w-full">
-      <div className="w-full flex flex-col lg:flex-row items-center justify-center">
-        <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-blue-800">
-          <span className="text-2xl font-extrabold"> Total Balance </span>
+      <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-4">
+        {" "}
+        {}
+        <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 bg-[#EA6A47] text-white shadow-lg rounded-lg border border-[#EA6A47]">
+          <span className="text-2xl font-extrabold">Total Balance</span>
           <span className="text-5xl font-extralight">
             {makeMonetaryNumber(900000000)}
           </span>
         </div>
-        <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-blue-800">
-          <span className="text-2xl font-extrabold"> Active Plan </span>
+        <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 bg-[#0091D5] text-white shadow-lg rounded-lg border border-[#0091D5]">
+          <span className="text-2xl font-extrabold">Active Plan</span>
           <span className="text-5xl font-extralight">Basic</span>
         </div>
-        <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 border-b border-dotted border-blue-800">
-          <span className="text-2xl font-extrabold"> Invested Balance </span>
+        <div className="w-full lg:w-2/12 p-3 flex flex-grow flex-col gap-2 mb-8 bg-[#A5D8DD] text-white shadow-lg rounded-lg border border-[#A5D8DD]">
+          <span className="text-2xl font-extrabold">Invested Balance</span>
           <span className="text-5xl font-extralight">
             {makeMonetaryNumber(1800000)}
           </span>
         </div>
       </div>
-     <Carousel
-          coinsData={coinsData}
-          selectedCoin={selectedCoin}
-          selectSingleCoin={selectSingleCoin}
-          makeMonetaryNumber={makeMonetaryNumber} // Pass the function as a prop
-        />
-   
+
+      <Carousel
+        coinsData={coinsData}
+        selectedCoin={selectedCoin}
+        selectSingleCoin={selectSingleCoin}
+        makeMonetaryNumber={makeMonetaryNumber} // Pass the function as a prop
+      />
+
       <div className="w-full items-start justify-start flex flex-col lg:flex-row gap-10">
         <div
           className="w-full lg:w-9/12 px-5 my-3 flex flex-col items-center justify-center"
