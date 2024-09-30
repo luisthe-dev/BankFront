@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const Withdraw = ({ setWithdraw, paymentMethods, submitAction }) => {
   const [withdrawData, setWithdrawData] = useState({
     amount: "",
-    payment_method: null,
+    payment_method: "",
     withdraw_address: "",
   });
 
@@ -14,7 +14,10 @@ const Withdraw = ({ setWithdraw, paymentMethods, submitAction }) => {
         onClick={() => setWithdraw(false)}
       ></div>
       <div className="flex w-full lg:w-5/12 flex-col items-start justify-start p-4 py-12 bg-black rounded-md z-40">
-        <span className="text-3xl mt-3 pl-5 font-semibold"> Make Deposit </span>
+        <span className="text-3xl mt-3 pl-5 font-semibold">
+          {" "}
+          Make Withdrawal{" "}
+        </span>
         <hr className="bg-white text-white w-full my-3" />
         <form
           role="form"
@@ -23,7 +26,7 @@ const Withdraw = ({ setWithdraw, paymentMethods, submitAction }) => {
         >
           <input
             type="number"
-            placeholder="deposit amount"
+            placeholder="withdrawal amount"
             value={withdrawData.amount}
             onInput={(e) =>
               setWithdrawData({ ...withdrawData, amount: e.target.value })
@@ -52,7 +55,7 @@ const Withdraw = ({ setWithdraw, paymentMethods, submitAction }) => {
           {withdrawData.payment_method != null && (
             <input
               type="text"
-              placeholder="deposit amount"
+              placeholder="withdrawal address"
               value={withdrawData.withdraw_address}
               onInput={(e) =>
                 setWithdrawData({
@@ -64,10 +67,15 @@ const Withdraw = ({ setWithdraw, paymentMethods, submitAction }) => {
             />
           )}
           <button
-            className="bg-blue-800 py-4 rounded-md my-4 w-10/12"
+            className={`bg-blue-800 py-4 rounded-md my-4 w-10/12 ${
+              withdrawData.payment_method == "" ||
+              withdrawData.withdraw_address == ""
+                ? "opacity-40"
+                : "opacity-100"
+            }`}
             disabled={
-              withdrawData.payment_method == null ||
-              withdrawData.withdraw_address == null
+              withdrawData.payment_method == "" ||
+              withdrawData.withdraw_address == ""
             }
             onClick={() =>
               submitAction({
@@ -78,7 +86,7 @@ const Withdraw = ({ setWithdraw, paymentMethods, submitAction }) => {
               })
             }
           >
-            I have made the transfer
+            Submit Request
           </button>
         </form>
       </div>
