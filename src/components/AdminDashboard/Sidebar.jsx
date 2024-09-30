@@ -12,32 +12,32 @@ const Sidebar = ({ menuState }) => {
     {
       icon: <LuLayoutDashboard />,
       title: "Home",
-      link: "/admin",
+      link: "/ads",
     },
     {
       icon: <LuUser />,
       title: "Users",
-      link: "/admin/users",
+      link: "/ads/users",
     },
     {
       icon: <LuHistory />,
       title: "User Transaction",
-      link: "/admin/transactions",
+      link: "/ads/transactions",
     },
     {
       icon: <AiOutlinePause />,
       title: "Pending Transaction",
-      link: "/admin/pending",
+      link: "/ads/pending",
     },
     {
       icon: <CiCircleList />,
       title: "Investment Plans",
-      link: "/admin/plans",
+      link: "/ads/plans",
     },
     {
       icon: <RiSettings3Fill />,
       title: "Settings",
-      link: "/admin/settings",
+      link: "/ads/settings",
     },
   ];
 
