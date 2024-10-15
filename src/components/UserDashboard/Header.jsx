@@ -1,6 +1,7 @@
 import React from "react";
 import { RiMenu5Fill } from "react-icons/ri";
 import { FiUser } from "react-icons/fi";
+import Image from "next/image";
 
 const Header = ({ menuHandler, menuState }) => {
   return (
