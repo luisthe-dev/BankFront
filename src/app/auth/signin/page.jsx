@@ -69,7 +69,7 @@ const page = () => {
       {messageBlock.visible && (
         <span
           className={`w-11/12 lg:w-5/12 self-center rounded-md ${
-            messageBlock.type === "error" ? "bg-red-400" : "bg-red-400"
+            messageBlock.type === "error" ? "bg-red-400" : "bg-blue-400"
           } text-center font-semibold text-md text-white py-3 px-6 my-2`}
         >
           {messageBlock.message}
