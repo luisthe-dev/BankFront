@@ -46,17 +46,40 @@ const Deposit = ({ setDeposit, paymentMethods, submitAction, isLoading }) => {
             ))}
           </select>
           {depositData.payment_method != null && (
-            <input
-              type="text"
-              placeholder="deposit amount"
-              value={
-                paymentMethods.filter(
+            <>
+              <input
+                type="text"
+                placeholder="deposit address"
+                value={
+                  paymentMethods
+                    .filter(
+                      (method) => method.name === depositData.payment_method
+                    )[0]
+                    ?.value.split("|")[0] ?? ""
+                }
+                readOnly
+                className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+              />
+              {paymentMethods
+                .filter(
                   (method) => method.name === depositData.payment_method
-                )[0]?.value ?? ""
-              }
-              readOnly
-              className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
-            />
+                )[0]
+                ?.value.split("|")[1] && (
+                <input
+                  type="text"
+                  placeholder="deposit network"
+                  value={
+                    paymentMethods
+                      .filter(
+                        (method) => method.name === depositData.payment_method
+                      )[0]
+                      ?.value.split("|")[1] ?? ""
+                  }
+                  readOnly
+                  className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+                />
+              )}
+            </>
           )}
           <button
             className={`bg-red-800 py-4 rounded-md my-4 w-10/12 ${
