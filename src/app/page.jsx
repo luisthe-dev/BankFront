@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Logo from "@/assets/images/logo.png";
 import Campaign from "@/assets/images/campaign.jpg";
 import People from "@/assets/images/people.jpg";
 import Image from "next/image";
