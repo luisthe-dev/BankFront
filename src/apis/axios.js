@@ -1,6 +1,6 @@
 const { default: axios } = require("axios");
 
-const baseUrl = "https://myserver.thrida.com/api";
+const baseUrl = "https://liquid.hearthsfireservices.com/api";
 // const baseUrl = "http://127.0.0.1:9005/api";
 
 export const mainAxios = axios.create({
