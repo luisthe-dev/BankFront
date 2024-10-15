@@ -101,7 +101,7 @@ const page = () => {
       )}
       <div className="w-full flex flex-col gap-5 items-start justify-start lg:p-4">
         <div className="flex flex-col lg:flex-row flex-wrap items-center justify-start gap-10 w-full p-3 lg:p-10">
-          <div className="flex flex-row flex-grow items-start justify-start gap-3 shadow-md border border-blue-800 p-5 rounded-md w-full lg:w-3/12">
+          <div className="flex flex-row flex-grow items-start justify-start gap-3 shadow-md border border-red-800 p-5 rounded-md w-full lg:w-3/12">
             <div className="flex items-center justify-center self-stretch">
               <IoIosWallet size={48} />
             </div>
@@ -112,7 +112,7 @@ const page = () => {
               <span className="text-md font-light"> Total Balance </span>
             </div>
           </div>
-          <div className="flex flex-row flex-grow items-start justify-start gap-3 shadow-md border border-blue-800 p-5 rounded-md w-full lg:w-3/12">
+          <div className="flex flex-row flex-grow items-start justify-start gap-3 shadow-md border border-red-800 p-5 rounded-md w-full lg:w-3/12">
             <div className="flex items-center justify-center self-stretch">
               <IoIosWallet size={48} />
             </div>
@@ -121,7 +121,7 @@ const page = () => {
               <span className="text-md font-light"> Active Plan </span>
             </div>
           </div>
-          <div className="flex flex-row flex-grow items-start justify-start gap-3 shadow-md border border-blue-800 p-5 rounded-md w-full lg:w-3/12">
+          <div className="flex flex-row flex-grow items-start justify-start gap-3 shadow-md border border-red-800 p-5 rounded-md w-full lg:w-3/12">
             <div className="flex items-center justify-center self-stretch">
               <IoIosWallet size={48} />
             </div>
@@ -139,7 +139,7 @@ const page = () => {
             <button
               key={actionKey}
               onClick={action.onclick}
-              className="flex flex-row gap-1 items-center justify-center text-lg font-light bg-blue-800 text-white rounded-sm p-3 px-8 hover:bg-transparent border border-solid border-blue-700"
+              className="flex flex-row gap-1 items-center justify-center text-lg font-light bg-red-800 text-white rounded-sm p-3 px-8 hover:bg-transparent border border-solid border-red-700"
             >
               {action.action}
             </button>
@@ -154,7 +154,7 @@ const page = () => {
                 className="flex flex-col items-center justify-center p-2 w-full lg:w-1/4 self-stretch justify-self-stretch"
                 key={planKey}
               >
-                <div className="border flex flex-col items-start justify-center border-blue-800 border-solid rounded-md p-12 px-6 justify-self-stretch self-stretch">
+                <div className="border flex flex-col items-start justify-center border-red-800 border-solid rounded-md p-12 px-6 justify-self-stretch self-stretch">
                   <span className="text-4xl font-extralight">{plan.title}</span>
                   <span className="text-lg font-semibold my-5">
                     {plan.price}
@@ -170,7 +170,7 @@ const page = () => {
                     ))}
                   <button
                     onClick={() => setDeposit(true)}
-                    className="p-4 flex flex-row w-full items-center justify-between gap-2 font-semibold text-sm px-3 my-5 bg-transparent hover:bg-blue-700 border border-blue-900 border-solid rounded-md"
+                    className="p-4 flex flex-row w-full items-center justify-between gap-2 font-semibold text-sm px-3 my-5 bg-transparent hover:bg-red-700 border border-red-900 border-solid rounded-md"
                   >
                     Choose Plan <FaArrowRightLong />
                   </button>

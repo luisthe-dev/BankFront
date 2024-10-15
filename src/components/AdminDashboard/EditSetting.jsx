@@ -26,7 +26,7 @@ const EditSetting = ({ setting, setSetting, submitAction }) => {
             onInput={(e) =>
               setActiveSetting({ ...activeSetting, name: e.target.value })
             }
-            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
           <textarea
             type="text"
@@ -39,10 +39,10 @@ const EditSetting = ({ setting, setSetting, submitAction }) => {
                 value: e.target.value,
               })
             }
-            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none resize-none"
+            className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none resize-none"
           ></textarea>
           <button
-            className="bg-blue-800 py-4 rounded-md my-4 w-10/12"
+            className="bg-red-800 py-4 rounded-md my-4 w-10/12"
             type="submit"
             onClick={() => submitAction(activeSetting)}
           >

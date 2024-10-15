@@ -1,8 +1,6 @@
 import React from "react";
 import { RiMenu5Fill } from "react-icons/ri";
 import { FiUser } from "react-icons/fi";
-import Logo from "@/assets/images/logo.png";
-import Image from "next/image";
 
 const Header = ({ menuHandler, menuState }) => {
   return (

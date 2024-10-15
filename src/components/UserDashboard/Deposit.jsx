@@ -27,10 +27,10 @@ const Deposit = ({ setDeposit, paymentMethods, submitAction, isLoading }) => {
             onInput={(e) =>
               setDepositData({ ...depositData, amount: e.target.value })
             }
-            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
           <select
-            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
             defaultValue={""}
             onChange={(e) =>
               setDepositData({ ...depositData, payment_method: e.target.value })
@@ -55,11 +55,11 @@ const Deposit = ({ setDeposit, paymentMethods, submitAction, isLoading }) => {
                 )[0]?.value ?? ""
               }
               readOnly
-              className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+              className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
             />
           )}
           <button
-            className={`bg-blue-800 py-4 rounded-md my-4 w-10/12 ${
+            className={`bg-red-800 py-4 rounded-md my-4 w-10/12 ${
               depositData.payment_method == null || isLoading
                 ? "opacity-40"
                 : "opacity-100"

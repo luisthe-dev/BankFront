@@ -26,7 +26,7 @@ const EditPlan = ({ plan, setPlan, submitAction }) => {
             onInput={(e) =>
               setActivePlan({ ...activePlan, name: e.target.value })
             }
-            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
           <input
             type="number"
@@ -35,7 +35,7 @@ const EditPlan = ({ plan, setPlan, submitAction }) => {
             onInput={(e) =>
               setActivePlan({ ...activePlan, min_price: e.target.value })
             }
-            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
           <input
             type="number"
@@ -44,7 +44,7 @@ const EditPlan = ({ plan, setPlan, submitAction }) => {
             onInput={(e) =>
               setActivePlan({ ...activePlan, max_price: e.target.value })
             }
-            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
           <textarea
             type="text"
@@ -57,10 +57,10 @@ const EditPlan = ({ plan, setPlan, submitAction }) => {
                 items: e.target.value.split(","),
               })
             }
-            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none resize-none"
+            className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none resize-none"
           ></textarea>
           <button
-            className="bg-blue-800 py-4 rounded-md my-4 w-10/12"
+            className="bg-red-800 py-4 rounded-md my-4 w-10/12"
             type="submit"
             onClick={() => submitAction(activePlan)}
           >

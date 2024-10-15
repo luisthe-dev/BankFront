@@ -51,7 +51,7 @@ const Sidebar = ({ menuState }) => {
           className={`flex flex-row items-center ${
             menuState ? "justify-start pl-5" : "justify-center pl-0"
           } gap-2 my-1 pt-5 pb-6 w-full relative transition-all ease-in-out duration-900 ${
-            activeIndex === menuKey ? "bg-blue-600" : "bg-transparent"
+            activeIndex === menuKey ? "bg-red-600" : "bg-transparent"
           } text-white`} // Set text color to white always
         >
           <span className="text-2xl">{menuItem.icon}</span>

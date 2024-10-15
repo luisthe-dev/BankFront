@@ -68,7 +68,7 @@ const page = () => {
           title={"Investment Plans"}
           actionButton={
             <button
-              className={`bg-blue-800 px-6 py-3 my-5 rounded-sm ${
+              className={`bg-red-800 px-6 py-3 my-5 rounded-sm ${
                 isLoading ? "opacity-40" : "opacity-100"
               }`}
               disabled={isLoading}
@@ -99,7 +99,7 @@ const page = () => {
                   className={`text-md font-medium flex flex-row flex-wrap items-center justify-center gap-2`}
                 >
                   <button
-                    className={`bg-blue-800 px-3 py-2 rounded-sm ${
+                    className={`bg-red-800 px-3 py-2 rounded-sm ${
                       isLoading ? "opacity-40" : "opacity-100"
                     }`}
                     disabled={isLoading}
@@ -108,7 +108,7 @@ const page = () => {
                     Update
                   </button>
                   <button
-                    className={`bg-blue-800 px-3 py-2 rounded-sm ${
+                    className={`bg-red-800 px-3 py-2 rounded-sm ${
                       isLoading ? "opacity-40" : "opacity-100"
                     }`}
                     disabled={isLoading}

@@ -69,7 +69,7 @@ const page = () => {
       {messageBlock.visible && (
         <span
           className={`w-11/12 lg:w-5/12 self-center rounded-md ${
-            messageBlock.type === "error" ? "bg-red-400" : "bg-blue-400"
+            messageBlock.type === "error" ? "bg-red-400" : "bg-red-400"
           } text-center font-semibold text-md text-white py-3 px-6 my-2`}
         >
           {messageBlock.message}
@@ -85,7 +85,7 @@ const page = () => {
           placeholder="Enter your email address"
           value={loginData.email}
           onInput={(e) => setLoginData({ ...loginData, email: e.target.value })}
-          className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 font-extralight text-lg outline-none"
+          className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 font-extralight text-lg outline-none"
         />
         <input
           placeholder="Password"
@@ -94,7 +94,7 @@ const page = () => {
           onInput={(e) =>
             setLoginData({ ...loginData, password: e.target.value })
           }
-          className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 font-extralight text-lg outline-none"
+          className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 font-extralight text-lg outline-none"
         />
         <div className="flex w-full items-center justify-between p-3 py-5">
           <span> Remember Me </span>
@@ -105,7 +105,7 @@ const page = () => {
           disabled={isLoading}
           className={`p-4 flex flex-row w-full ${
             isLoading ? "opacity-40" : "opacity-100"
-          } items-center justify-between gap-2 font-semibold text-md px-10 bg-transparent hover:bg-blue-700 border border-blue-900 border-solid`}
+          } items-center justify-between gap-2 font-semibold text-md px-10 bg-transparent hover:bg-red-700 border border-red-900 border-solid`}
           type="submit"
         >
           Sign In

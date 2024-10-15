@@ -31,10 +31,10 @@ const Withdraw = ({ setWithdraw, paymentMethods, submitAction, isLoading }) => {
             onInput={(e) =>
               setWithdrawData({ ...withdrawData, amount: e.target.value })
             }
-            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
           />
           <select
-            className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+            className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
             defaultValue={""}
             onChange={(e) =>
               setWithdrawData({
@@ -63,11 +63,11 @@ const Withdraw = ({ setWithdraw, paymentMethods, submitAction, isLoading }) => {
                   withdraw_address: e.target.value,
                 })
               }
-              className="w-full border-b border-blue-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
+              className="w-full border-b border-red-700 border-solid bg-[transparent] p-5 my-5 font-extralight text-lg outline-none"
             />
           )}
           <button
-            className={`bg-blue-800 py-4 rounded-md my-4 w-10/12 ${
+            className={`bg-red-800 py-4 rounded-md my-4 w-10/12 ${
               withdrawData.payment_method == "" ||
               withdrawData.withdraw_address == "" ||
               isLoading

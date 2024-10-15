@@ -115,7 +115,7 @@ const page = () => {
     },
     {
       title: "Instant withdrawal",
-      text: "Withdrawals from MAN Investments Inc wallet are sent to your external wallet instantly from the time of your withdrawal.",
+      text: "Withdrawals from Liquet Investments Inc wallet are sent to your external wallet instantly from the time of your withdrawal.",
     },
     {
       title: "Real Estate",
@@ -127,7 +127,7 @@ const page = () => {
     },
     {
       title: "Investment planning",
-      text: "Your investment multiplies with MAN Investments Inc, withdraw your profits whenever you want or purchase more plans from them.",
+      text: "Your investment multiplies with Liquet Investments Inc, withdraw your profits whenever you want or purchase more plans from them.",
     },
     {
       title: "Skilled management",
@@ -156,7 +156,7 @@ const page = () => {
               trading offers, Options trading, stocks, derivatives, currency
               pairs.
             </span>
-            <button className="p-4 flex flex-row items-center justify-center gap-2 font-semibold text-md px-10 bg-blue-950">
+            <button className="p-4 flex flex-row items-center justify-center gap-2 font-semibold text-md px-10 bg-red-950">
               Get Started
               <RxArrowTopRight size={20} />
             </button>
@@ -204,7 +204,7 @@ const page = () => {
               <FcBrokenLink size={32} /> About Us
             </span>
             <span className="text-lg font-semibold text-gray-400 w-full text-justify">
-              At MAN Investments Inc, we stand firm in our belief in
+              At Liquet Investments Inc, we stand firm in our belief in
               diversifying investments to offer you a glimpse of the potential
               for passive earnings. With a wealth of experience on board and
               state-of-the-art analytical technologies at our disposal, we are
@@ -224,7 +224,7 @@ const page = () => {
               low risk and swift returns. To attain this, we continuously
               challenge the boundaries of foreign exchange and currency trading
               and employ novel trading strategies to unlock the potential for
-              remarkable profits. At MAN Investments Inc, we are committed to
+              remarkable profits. At Liquet Investments Inc, we are committed to
               creating value for our investors, and the assurance of profit is
               at the core of our commitment. Our aim is to reduce risks and
               ensure a stable and sustainable income for our investors. With the
@@ -248,7 +248,7 @@ const page = () => {
             Be Part Of Something Bigger
           </span>
           <span className="text-lg font-semibold text-gray-400 w-full text-justify">
-            The MAN Investments Inc visionary team is committed to delivering
+            The Liquet Investments Inc visionary team is committed to delivering
             exceptional results, focused being one step ahead. We are building
             an FX trading platform for the long-term, setting up the standard to
             change the fortune of future generations to come! A completely
@@ -310,7 +310,7 @@ const page = () => {
             higher.
           </span>
           <div className="w-full flex flex-col items-center lg:items-start justify-center lg:w-10/12 py-10">
-            <button className="p-4 flex flex-row items-center justify-center gap-2 font-semibold text-md px-10 bg-blue-700">
+            <button className="p-4 flex flex-row items-center justify-center gap-2 font-semibold text-md px-10 bg-red-700">
               Become a copy trader
               <RxArrowTopRight size={20} />
             </button>
@@ -337,12 +337,12 @@ const page = () => {
                       key={itemKey}
                       className="flex flex-row items-center justify-start gap-2 pl-5 py-1 font-medium text-lg"
                     >
-                      <IoMdCheckmark color={"blue"} /> {item}
+                      <IoMdCheckmark color={"red"} /> {item}
                     </span>
                   ))}
                   <button
                     onClick={() => navigation.push("/auth/signin")}
-                    className="my-8 p-4 w-full lg:w-10/12 flex flex-row items-center justify-between gap-2 font-light text-md px-5 bg-blue-700 text-white"
+                    className="my-8 p-4 w-full lg:w-10/12 flex flex-row items-center justify-between gap-2 font-light text-md px-5 bg-red-700 text-white"
                   >
                     Get Started
                     <RxArrowTopRight size={20} />
